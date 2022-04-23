@@ -15,10 +15,10 @@ export default function InterviewerListItem({
     "interviewers__item--selected": selected
   })
   // console.log(interviewerClass, 'INTERVIEWER CALSS')
-  const handleInterviewerClick = () => setInterviewer;
+
 
   return (
-    <li onClick={handleInterviewerClick(id)} className={interviewerClass}>
+    <li onClick={setInterviewer} className={interviewerClass}>
       <img className="interviewers__item-image" src={avatar} alt={name} id={id}/>
       {selected && name}
     </li>

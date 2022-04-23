@@ -12,7 +12,13 @@ export default function DayListItem({ name, spots, selected, setDay }) {
     "day-list__item--selected": selected,
     "day-list__item--full": spots === 0,
   });
-  // console.log(spots, "SPOTSPSOTSPOTSPTO")
+/* 
+return (
+    <li className={dayClass} onClick={() => props.setDay(props.name)} selected={props.selected}>
+      <h2 className="text--regular">{props.name}</h2> 
+      <h3 className="text--light">{formatSpots()}</h3>
+    </li>
+  ); */
   const formatSpots = () => {
     if (spots === 1) {
       return "1 spot remaining";
