@@ -8,11 +8,12 @@ export default function InterviewerList(props) {
 
   const interviewers = props.interviewers.map(interviewer =>{
     console.log(props, "    PROPS  ")
+    // id={interviewer.id}
+    // {props.onChange(interviewer.id)}
     return (
       <InterviewerListItem
         key={interviewer.id}
       
-        id={interviewer.id}
         
         name={interviewer.name}
 
@@ -20,11 +21,10 @@ export default function InterviewerList(props) {
         
         selected={interviewer.id ===  props.interviewer}
 
-        setInterviewer={(e) => props.setInterviewer(interviewer.id)}
+        setInterviewer={() => props.onChange(interviewer.id)}
 
     />
     )
-    
 })
  return (
   <section className="interviewers">

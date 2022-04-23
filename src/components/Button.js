@@ -7,17 +7,18 @@ export default function Button(props) {
     "button--confirm": props.confirm,
     "button--danger": props.danger,
   });
-  const handleButtonClick = () => {
-    if (props.disabled) {
-      buttonClass += " button--disabled";
-    }
-  }
+  // const handleButtonClick = () => {
+  //   // console.log("BOTTONCLICKED")
+  //   if (props.disabled) {
+  //     buttonClass += " button--disabled";
+  //   }
+  // }
  
  
   return (
     <button
       className={buttonClass}
-      onClick={handleButtonClick}
+      onClick={props.onClick}
       disabled={props.disabled}
     >
     {props.children}
