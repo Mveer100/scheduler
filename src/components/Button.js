@@ -7,20 +7,20 @@ export default function Button(props) {
     "button--confirm": props.confirm,
     "button--danger": props.danger,
   });
-
+  const handleButtonClick = () => {
+    if (props.disabled) {
+      buttonClass += " button--disabled";
+    }
+  }
+ 
+ 
   return (
     <button
       className={buttonClass}
-      onClick={props.onClick}
+      onClick={handleButtonClick}
       disabled={props.disabled}
     >
-      {props.children}
+    {props.children}
     </button>
   );
 }
-// const handleButtonClick = () => {
-//    if (props.disabled) {
-//      buttonClass += " button--disabled";
-//    }
-//  }
-//
