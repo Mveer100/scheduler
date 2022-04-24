@@ -1,4 +1,4 @@
-import React /* { useState } */ from "react";
+import React, { useState } from "react";
 import classNames from "classnames";
 import "components/InterviewerList.scss";
 import InterviewerListItem from "./InterviewerListItem";
@@ -19,7 +19,7 @@ export default function InterviewerList(props) {
 
         avatar={interviewer.avatar}
         
-        selected={interviewer.id ===  props.interviewer}
+        selected={interviewer.id === props.value}
 
         setInterviewer={() => props.onChange(interviewer.id)}
 
