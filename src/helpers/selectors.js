@@ -6,12 +6,6 @@ getAppointmentsForDay function returns the correct array based on the value of s
 // const result = ages.filter(age >= 18);
 
 
-// FORMERLY GETAPPPOINTMENTFORDAY
-/* const appointment = state.days.forEach(element => { 
-  
-  if (element.name === day) return element.appointments
-});
-return appointment; */
 export function getAppointmentsForDay(state, day) {
   // console.log(state.days.length)
   // console.log(day)
