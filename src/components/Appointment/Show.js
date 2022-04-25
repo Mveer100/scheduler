@@ -1,15 +1,15 @@
 import React from "react";
-
-export default function Shows({student, interviewer, onEdit, onDelete}) {
-console.log(student, "student")
-console.log(interviewer, 'interviewer')
+// 
+export default function Show({student, interviewer, onEdit, onDelete}) {
+// console.log(student, "studentoop")
+console.log(student, interviewer, onEdit, onDelete, 'interviewer------------------------')
   return (
     <main className="appointment__card appointment__card--show">
   <section className="appointment__card-left">
-    <h2 className="text--regular">Studentnamehere</h2>
+    <h2 className="text--regular">{student}</h2>
     <section className="interviewer">
       <h4 className="text--light">Interviewer</h4>
-      <h3 className="text--regular">SylviaLastName</h3>
+      <h3 className="text--regular">{interviewer.name}</h3>
     </section>
   </section>
   <section className="appointment__card-right">
