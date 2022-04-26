@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import InterviewerList from "components/InterviewerList";
 import Button from "components/Button";
-// console.log(121241234123412)
+
 export default function Form(props) {
   console.log("PROPS OF FORM PLEASE", props)
   const {interviewers, onSave, onCancel} = props;
