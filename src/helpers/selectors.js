@@ -1,29 +1,55 @@
-
 /*
 getAppointmentsForDay function returns the correct array based on the value of state and state.day
 */
 
 // const result = ages.filter(age >= 18);
 
-
-
 export function getAppointmentsForDay(state, day) {
-  // console.log(state.days.length)
-  // console.log(day)
+  const { days, appointments } = state;
   
-  const selectedDay = state.days.find(element => element.name === day)
-  
-  // console.log(selectedDay)
-  if(state.days.length === 0) return []
-  else if(!selectedDay) return [];
-  const appointmentIds = selectedDay.appointments;
+  const dayObj = days.find((element) => element.name === day);
 
-  const appointments = appointmentIds.map((id => state.appointments[id]))
-  // console.log(appointments)
-  
-  return appointments;
-  
+  if (days.length === 0 || dayObj === undefined) return [];
+
+  return dayObj.appointments.map((id) => appointments[id]);
 }
+// -----------
+
+export function getInterviewersForDay(state, day) {
+  const { days, interviewers } = state;
+  const dayObj = days.find((d) => d.name.toLowerCase() === day.toLowerCase())
+
+  console.log(days, 'DAYSDAYS')
+  console.log(dayObj, "dayobjdayojb")
+  // console.log()
+  if (state.days.length === 0 || dayObj === undefined) return [];
+ 
+  return  dayObj.interviewers.map((id) => interviewers[id]);;
+}
+
+// -----------
+
+export function getInterview(state, interviewAppointment) {
+  //must return null if interview is a falsy value)
+  if (!interviewAppointment) return null;
+  // console.log("innerviewtester", interviewAppointment)
+
+  const { student: studentName, interviewer: interviewerID } =
+    interviewAppointment;
+
+  return {
+    student: studentName,
+    interviewer: state.interviewers[interviewerID],
+  };
+}
+
+// array of appointment ids : object of appointments
+//
+
+// console.log(state.days[0].name, "testetetsdt")
+// console.log(element.appointments,"elementelenemene")
+// console.log(element.name, "ELEMENT DOT A ANAME")
+// console.log(day, 'DAY DAY DAY LOGGING DAY')
 
 // statetesters {
 //   days: [
@@ -52,25 +78,3 @@ export function getAppointmentsForDay(state, day) {
 // }
 //  interview = {student: 'Archie Cohen', interviewer: 2 }
 //state = /*  */
-export function getInterview(state, interviewAppointment) {
-//must return null if interview is a falsy value)
-  if (!interviewAppointment) return null;
-  // console.log("innerviewtester", interviewAppointment)
-
-  const  {student: studentName, interviewer: interviewerID} = interviewAppointment;
-  
-  
-  return {
-    student: studentName,
-    interviewer: state.interviewers[interviewerID]
-  }
-  
-};
-
-// array of appointment ids : object of appointments
-  // 
-
-  // console.log(state.days[0].name, "testetetsdt")
-  // console.log(element.appointments,"elementelenemene") 
-  // console.log(element.name, "ELEMENT DOT A ANAME")
-  // console.log(day, 'DAY DAY DAY LOGGING DAY')
