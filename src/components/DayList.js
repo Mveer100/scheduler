@@ -9,7 +9,7 @@ import DayListItem from "./DayListItem.js";
 
 export default function DayList({ value, onChange, days}) {
 
-  console.log("THIS IS THE DAY!!!!!!", days)
+  // console.log("THIS IS THE DAY!!!!!!", days)
   const daysArr = days.map(({id, name, spots}) => {
     // props.day is current day name
     //props.days.name is the selected day

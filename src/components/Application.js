@@ -66,34 +66,39 @@ export default function Application(props) {
     days: [],
     // you may put the line below, but will have to remove/comment hardcoded appointments variable
     appointments: {},
+    interviewers: {},
   });
-  const dailyAppointments = getAppointmentsForDay( state, state.day)
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
   const setDay = (day) => setState({ ...state, day });
-  // const setDays = days => setState(prev => ({...prev, days}));
-
-  console.log("THISISTHESTATELOG", state);
-  
   useEffect(() => {
     Promise.all([
       axios.get(`/api/days`), //index0
       axios.get(`/api/appointments`), //index1
+      axios.get(`/api/interviewers`), 
     ]).then((all) => {
-      setState(prev =>({...prev, days: all[0].data, appointments: all[1].data}));
-      // console.log(all[0], "APIreq days");
-      // console.log(all[1], "apireq Appointments")
+      setState((prev) => ({
+        ...prev,
+        days: all[0].data,
+        appointments: all[1].data,
+        interviewers: all[2].data,
+      }));
     });
-    
-    // axios.get(`/api/days`).then((res) => {
-    //   // setDays(res.data)
-    // });
   }, []);
 
-  const appointment = dailyAppointments.map(({ id, time, interview }) => {
-    return <Appointment key={id} id={id} time={time} interview={interview} />;
+  console.log(state.interviewers, "innerviewers");
+  console.log(dailyAppointments, 'dailyapps')
+
+  const schedule = dailyAppointments.map((appointment) => {
+    const interview = getInterview(state, appointment.interview);
+    return <Appointment 
+    key={appointment.id} 
+    id={appointment.id} 
+    time={appointment.time} 
+    interview={interview} />;
   });
 
   // {props.interview ? <Show student={props.student} interviewer={props.interviewer} /> : <Empty />}
-  console.log(appointment, "BING CHILLING");
+  // console.log(appointment, "BING CHILLING");
   return (
     <main className="layout">
       <section className="sidebar">
@@ -113,9 +118,9 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-        {appointment}
-      <Appointment time={'5pm'} />
-        </section>
+        {schedule}
+        <Appointment time={"5pm"} />
+      </section>
     </main>
   );
 }

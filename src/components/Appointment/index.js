@@ -11,10 +11,16 @@ import Empty from "./Empty";
 
 export default function Appointment(props) {
   // console.log(props, "__________PROPS_________")
+  // function save(name, interviewer) {
+  //   const interview = {
+  //     student: name,
+  //     interviewer
+  //   };
+  // }
   return (
     <article className="appointment">
       <Header time={props.time} />
-      {props.interview ? <Show student={props.interview.student} interviewer={props.interview.interviewer} /> : <Empty />}
+      {props.interview ? <Show student={props.interview.student} interviewer={props.interview.interviewer} /> : <Empty {...props} />}
     </article>
   );
 }
