@@ -1,5 +1,8 @@
+
+
 export function getAppointmentsForDay(state, day) {
   const { days, appointments } = state;
+  console.log(state, "STATE GETAPPDAY")
 
   const dayObj = days.find((element) => element.name === day);
 
@@ -11,15 +14,15 @@ export function getAppointmentsForDay(state, day) {
 
 export function getInterviewersForDay(state, day) {
   const { days, interviewers } = state;
+  // console.log(days, "DAYSDAYS");
 
   const dayObj = days.find((element) => element.name === day);
+  if (state.days.length === 0 || dayObj === undefined) return [];
 
-  // console.log(days, "DAYSDAYS");
 
   // console.log(dayObj, "dayobjdayojb");
 
-  if (state.days.length === 0 || dayObj === undefined) return [];
-  console.log(dayObj, "DAYOBJ")
+  // console.log(dayObj, "DAYOBJ")
   return dayObj.interviewers.map((id) => interviewers[id]);
 }
 

@@ -13,8 +13,6 @@ export default function Application(props) {
     interviewers: {},
   });
  ;
- 
-//   const { days, appointments } = state;
   const setDay = (day) => setState({ ...state, day });
   useEffect(() => {
     Promise.all([
@@ -32,10 +30,14 @@ export default function Application(props) {
     });
   }, []);
   // console.log(state.interviewers, "innerviewers");
-  console.log(state, "STATE")
+  // console.log(state, "STATE")
   const {days, appointments, day} = state;
   const dailyAppointments = getAppointmentsForDay({days, appointments}, day) 
-  console.log(dailyAppointments, "dailyapps");
+
+  function bookInterview(id, interview) {
+    console.log(id, interview);
+  }
+  // console.log(dailyAppointments, "dailyapps");
   
   const schedule = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
@@ -48,9 +50,12 @@ export default function Application(props) {
         id={appointment.id}
         time={appointment.time}
         interview={interview}
+        bookInterview={bookInterview}
       />
     );
   });
+  
+  
 
   // {props.interview ? <Show student={props.student} interviewer={props.interviewer} /> : <Empty />}
   // console.log(appointment, "BING CHILLING");
@@ -73,8 +78,13 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-        {schedule}
-        {/* <Appointment time={"5pm"} /> */}
+        {schedule} 
+        <Appointment
+    interviewers={state.interviewers}
+    days={state.days}
+    day={state.day}
+    time="5pm"
+  />
       </section>
     </main>
   );

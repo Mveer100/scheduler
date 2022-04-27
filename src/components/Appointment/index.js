@@ -13,7 +13,7 @@ import { getInterviewersForDay } from "helpers/selectors";
 // <Error> = When there is an error
 
 export default function Appointment(props) {
-  console.log(props, "__________PROPS_________")
+  // console.log(props, "__________PROPS_________")
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE ="CREATE"
@@ -22,6 +22,17 @@ export default function Appointment(props) {
   );
   const {days, interviewers, day} = props;
   const interviewersArr = getInterviewersForDay({days, interviewers}, day)
+  console.log("MODEMODE", mode)
+
+  // function save(name, interviewer) {
+  //   const interview = {
+  //     student: name,
+  //     interviewer
+  //   };
+  //   console.log
+  // }
+
+
   return (
     <article className="appointment">
       <Header time={props.time} />
@@ -34,7 +45,7 @@ export default function Appointment(props) {
   )}
   {mode === CREATE && (
     <Form
-      interviewers={[]} 
+      interviewers={interviewersArr} 
       onCancel={()=>back()}
     />
   )}
