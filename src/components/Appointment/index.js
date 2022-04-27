@@ -5,6 +5,7 @@ import Show from "./Show";
 import Empty from "./Empty";
 import Form from "./Form";
 import useVisualMode from "components/hooks/useVisualMode";
+import { getInterviewersForDay } from "helpers/selectors";
 // <Empty> = well that should be obvious maxwell(It's empty)
 // <Show> = When it is booked
 // <Confirm> = When we want a user to confirm an action
@@ -19,12 +20,8 @@ export default function Appointment(props) {
   const {mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
-  // if(props.interview) {
-  //   useVisualMode(SHOW);
-  // } else {
-  //   useVisualMode(EMPTY);
-  // }
- 
+  const {days, interviewers, day} = props;
+  const interviewersArr = getInterviewersForDay({days, interviewers}, day)
   return (
     <article className="appointment">
       <Header time={props.time} />
@@ -37,7 +34,8 @@ export default function Appointment(props) {
   )}
   {mode === CREATE && (
     <Form
-      interviewers={[]} onCancel={()=>back()}
+      interviewers={[]} 
+      onCancel={()=>back()}
     />
   )}
     </article>
