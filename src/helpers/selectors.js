@@ -2,7 +2,7 @@
 
 export function getAppointmentsForDay(state, day) {
   const { days, appointments } = state;
-  console.log(state, "STATE GETAPPDAY")
+  // console.log(state, "STATE GETAPPDAY")
 
   const dayObj = days.find((element) => element.name === day);
 

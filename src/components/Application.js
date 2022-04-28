@@ -20,7 +20,7 @@ export default function Application(props) {
       axios.get(`http://localhost:8001/api/appointments`), //index1
       axios.get(`http://localhost:8001/api/interviewers`),
     ]).then((all) => {
-      console.log("INTERVIEWERS LOG", all)
+      // console.log("INTERVIEWERS LOG", all)
       setState((prev) => ({
         ...prev,
         days: all[0].data,
@@ -35,8 +35,39 @@ export default function Application(props) {
   const dailyAppointments = getAppointmentsForDay({days, appointments}, day) 
 
   function bookInterview(id, interview) {
-    console.log(id, interview);
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+  
+    return axios.put(`http://localhost:8001/api/appointments/${id}`, {interview}).then(() => {
+      setState({ ...state, appointments });
+    })
   }
+  function cancelInterview(appointmentId) {
+    const appointment = {
+      ...state.appointments[appointmentId],
+      interview: null,
+    };
+    const appointments = {
+      ...state.appointments,
+      [appointmentId]: appointment,
+    };
+
+    return axios
+      .delete(`/api/appointments/${appointmentId}`)
+      .then(() => {
+        setState({ ...state, appointments, days });
+      })
+      .catch((error) => {
+        throw error;
+      });
+  };
+
   // console.log(dailyAppointments, "dailyapps");
   
   const schedule = dailyAppointments.map((appointment) => {
@@ -51,6 +82,7 @@ export default function Application(props) {
         time={appointment.time}
         interview={interview}
         bookInterview={bookInterview}
+        cancelInterview={cancelInterview}        
       />
     );
   });
