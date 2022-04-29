@@ -106,7 +106,8 @@ export default function Appointment(props) {
       onSave={save} 
       interviewers={interviewersArr} 
       onCancel={back} 
-      />}
+      />
+      }
       {mode === CONFIRM && <Confirm message="DELETING" onCancel={back} onConfirm={onDelete} />}
     </article>
   );

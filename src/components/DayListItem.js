@@ -31,6 +31,7 @@ export default function DayListItem({ name, spots, selected, setDay }) {
         setDay(name);
       }}
       selected={selected}
+      data-testid="day"
     >
       <h2 className="text--regular">{name}</h2>
       <h3 className="text--light">{formatSpots()}</h3>
@@ -41,13 +42,7 @@ export default function DayListItem({ name, spots, selected, setDay }) {
 /*
 CONDITIONALS = 
 day-list__item all the time
-
 day-list__item--selected class name if props.selected is true
-
 day-list__item--full class name if props.spots is 0.
-
-
 Need to update our component to apply the day-list__item--selected and day-list__item--full styles based on the props we are passing to DayListItem using the classnames library
-
-
 */
