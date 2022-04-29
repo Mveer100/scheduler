@@ -13,11 +13,12 @@ export function getAppointmentsForDay(state, day) {
 // -----------
 
 export function getInterviewersForDay(state, day) {
-  const { days, interviewers } = state;
-  // console.log(days, "DAYSDAYS");
 
+  const { days = [] , interviewers } = state;
+  // console.log(days, "DAYSDAYS");
+console.log(days, "DAYS!!!")
   const dayObj = days.find((element) => element.name === day);
-  if (state.days.length === 0 || dayObj === undefined) return [];
+  if (days.length === 0 || dayObj === undefined) return [];
 
 
   // console.log(dayObj, "dayobjdayojb");

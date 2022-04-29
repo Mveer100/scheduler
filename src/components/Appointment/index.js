@@ -8,6 +8,7 @@ import Empty from "./Empty";
 import Form from "./Form";
 import Status from "./Status";
 import Confirm from "./Confirm";
+import Error from "./Error";
 import { getInterviewersForDay } from "helpers/selectors";
 
 import useVisualMode from "components/hooks/useVisualMode";
@@ -21,10 +22,12 @@ const SHOW = "SHOW";
 const CREATE = "CREATE";
 const SAVING = "SAVING";
 const CONFIRM = "CONFIRM";
-const DELETING = "DELETING"
-
+const DELETING = "DELETING";
+const EDIT = "EDIT";
+const ERROR_SAVE = "ERROR_SAVE"
+const ERROR_DELETE = "ERROR_DELETE"
 export default function Appointment(props) {
-  console.log(props, "__________PROPS_________");
+  // console.log(props, "__________PROPS_________");
 
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
@@ -32,37 +35,79 @@ export default function Appointment(props) {
   const { days, interviewers, day, bookInterview } = props;
 
   const interviewersArr = getInterviewersForDay({ days, interviewers }, day);
-
+// console.log(interviewersArr, "INTERVIEWARRAY")
   function save(name, interviewer) {
-    const interview = {
-      student: name,
-      interviewer,
-    };
-    transition(SAVING);
-    props.bookInterview(props.id, interview).then(() => transition(SHOW));
+    console.log(name, interviewer, "errorlogs")
+    
+    if (name && interviewer) {
+      const interview = {
+        student: name,
+        interviewer,
+      };
+      transition(SAVING);
+  
+      props
+        .bookInterview(props.id, interview)
+        .then(() => transition(SHOW))
+        .catch(error => transition(ERROR_SAVE, true));
+      }
+
+      else {
+        // console.log();
+
+      }
+
+
+      
+      // return;
+
   }
+  
+  
+
+
   function onDelete() {
-    transition(DELETING)
-    props.cancelInterview(props.id).then(() => transition(EMPTY));
+    transition(DELETING, true)
+    props
+      .cancelInterview(props.id)
+      .then(() => transition(EMPTY))
+      .catch(error=> transition(ERROR_DELETE, true));
   }
-console.log(props, "props why are you nul")
+// console.log(props, "props why are you nul")
   return (
     <article className="appointment">
       <Header time={props.time} />
+
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
+      
       {mode === SHOW &&  <Show
+          onEdit={()=>transition(EDIT)}
           onDelete={() => transition(CONFIRM)}
           student={props.interview.student}
           interviewer={props.interview.interviewer}
         /> }
+       {mode === EDIT && (
+          <Form
+            student={props.interview.student}
+            interviewer={props.interview.interviewer}
+            interviewers={interviewersArr}
+            onSave={save}
+            onCancel={back}
+          />
+        )}
+
       {mode === SAVING && <Status message="SAVING!!!!!!!!!!!!!!!!!11111" />}
+        {mode === ERROR_SAVE && <Error message="That didn't work and it probably is the developer's fault so dont worry" onClose={()=> transition(EMPTY)}/>}
+
       {mode === DELETING && <Status message="DEEEE-LITE-ING!!!!!!!!!!!!!!!!!11111" />}
-      {mode === CREATE && (
-        <Form onSave={save} interviewers={interviewersArr} onCancel={back} />
-      )}
-      {mode === CONFIRM && (
-        <Confirm message="DELETING" onCancel={back} onConfirm={onDelete} />
-      )}
+        {mode === ERROR_DELETE && <Error message="That didn't work and it probably is the developer's fault so dont worry" onClose={()=> transition(SHOW)}/>}
+      {mode === CREATE &&  
+      <Form 
+      onSave={save} 
+      interviewers={interviewersArr} 
+      onCancel={back} 
+      />}
+      {mode === CONFIRM && <Confirm message="DELETING" onCancel={back} onConfirm={onDelete} />}
     </article>
   );
 }

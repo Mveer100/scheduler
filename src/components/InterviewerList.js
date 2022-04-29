@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import classNames from "classnames";
 import "components/InterviewerList.scss";
 import InterviewerListItem from "./InterviewerListItem";
+import PropTypes from 'prop-types'; 
 // import DayList from "./DayList";
 // interviewers: an array of objects each object represents an interviewer and includes their id, name and avatar(imglink)
 export default function InterviewerList(props) {
@@ -34,6 +35,16 @@ export default function InterviewerList(props) {
 </section>
  );
 }
+
+InterviewerList.propTypes = {
+  interviewers: PropTypes.array.isRequired
+};
+
+
+
+
+
+
 // let dayClass = classNames("day-list__item", {
 //   "--selected": selected,
 //   "--full": (spots === 0)
