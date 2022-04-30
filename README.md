@@ -1,5 +1,5 @@
 # Interview Scheduler
-
+Interview Scheduler is a web-app that allows a user to create, update and delete interviews.
 ## Setup
 
 Install dependencies with `npm install`.
@@ -22,7 +22,7 @@ npm test
 npm run storybook
 ```
 
-Interview Scheduler is a web-app that allows a user to create, update and delete interviews.
+
 
 
 > EDIT
