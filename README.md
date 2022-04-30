@@ -22,6 +22,9 @@ npm test
 npm run storybook
 ```
 
+Interview Scheduler is a web-app that allows a user to create, update and delete interviews.
+
+
 > EDIT
 !["EDITING"](https://github.com/Mveer100/scheduler/blob/master/docs/SCHEDULER_SAVINg.png?raw=true)
 
